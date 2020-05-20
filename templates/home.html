@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap-3.3.7-dist\css\bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<h1>图书管理系统</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div>
+                <a href="{% url 'add' %}" class="btn btn-primary">添加书籍</a>
+            </div>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>书籍名称</th>
+                        <th>价格</th>
+                        <th>出版日期</th>
+                        <th>出版社</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in name %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.price }}</td>
+                            <td>{{ i.data|date:'Y-m-d' }}</td>
+                            <td>{{ i.press }}</td>
+                            <td>
+                                <a href="{% url 'edit' i.id %}" class="btn btn-warning">编辑</a>
+                                <a href="{% url 'delete' i.id %}" class="btn btn-danger" id="delete">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
